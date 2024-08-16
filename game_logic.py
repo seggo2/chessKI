@@ -73,6 +73,12 @@ def is_valid_king_move(start_pos, end_pos):
 
 def is_valid_move(start_pos, end_pos, board, turn):
     piece = board[start_pos[0]][start_pos[1]]
+    target_piece = board[end_pos[0]][end_pos[1]]
+    
+    # Überprüfen, ob das Zielfeld eine eigene Figur enthält
+    if target_piece != '--' and target_piece[0] == piece[0]:
+        return False
+
     if piece == '--' or (piece[0] == 'w' and turn != 'white') or (piece[0] == 'b' and turn != 'black'):
         return False
 
@@ -90,6 +96,7 @@ def is_valid_move(start_pos, end_pos, board, turn):
         return is_valid_king_move(start_pos, end_pos)
     
     return False
+
 
 def generate_valid_moves(start_pos, board, turn):
     valid_moves = []
